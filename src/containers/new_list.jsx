@@ -4,12 +4,18 @@ import { FormGroup, InputGroup, FormControl, Row, Col } from 'react-bootstrap';
 import { setItem, setTitle } from '../actions/answers_actions';
 
 class NewList extends Component {
+  constructor(props) {
+    super(props);
+    this.onNewValue = this.onNewValue.bind(this);
+  }
   onNewValue(event) {
     event.preventDefault();
-    this.props.setItem(50, event.target.value, true);
+    const currentAnswers = this.props.answers;
+    const currentAnswersLength = Object.keys(currentAnswers).length;
+    console.log(currentAnswersLength);
+    this.props.setItem(currentAnswersLength, event.target.value, true);
   }
   render() {
-    console.log(this.props.setItem);
     console.log(this.props.answers);
     return (
       <div className="container">
@@ -36,8 +42,7 @@ class NewList extends Component {
 
 NewList.propTypes = {
   setItem: PropTypes.func.isRequired,
-  setTitle: PropTypes.func,
-  answers: PropTypes.object
+  answers: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

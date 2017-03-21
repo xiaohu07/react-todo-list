@@ -10,7 +10,6 @@ import Header from './components/header';
 import NewList from './containers/new_list';
 import reducers from './reducers/index';
 
-
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
 ReactDOM.render(

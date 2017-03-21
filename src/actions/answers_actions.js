@@ -3,24 +3,16 @@
  */
 import { SET_ITEM, SET_TITLE } from '../constants/index';
 
-export function setItem(listId, content, newList) {
-  let tempListId = listId;
-  if (newList) {
-    tempListId = 50;
-  }
+export function setItem(listId, content) {
   return {
     type: SET_ITEM,
-    payload: { tempListId, content }
+    payload: { listId, content }
   };
 }
 
-export function setTitle(listId, title, newList) {
-  let tempListId = listId;
-  if (newList) {
-    tempListId = 50;
-  }
+export function setTitle(listId, title) {
   return {
     type: SET_TITLE,
-    payload: { tempListId, title }
+    payload: { listId, title }
   };
 }
