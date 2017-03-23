@@ -8,12 +8,11 @@ const INITIAL_STATE = {};
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case SET_ITEM: {
-      return {
+      return Object.assign({}, state, {
         [action.payload.listId]: {
           listId: action.payload.listId,
           value: action.payload.content
-        }
-      };
+        }});
     }
     default:
       return state;
