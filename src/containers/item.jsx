@@ -11,9 +11,13 @@ export default class Item extends Component {
     event.preventDefault();
     this.touched = true;
     this.props.setItem(this.props.item.itemId, this.props.item.listId, event.target.value);
+    console.log(this.props.last);
+    if (this.props.last) {
+      this.props.setNewItem(this.props.item.itemId + 1, this.props.item.listId, null);
+    }
   }
   render() {
-    console.log(this.props.item);
+    console.log(this.props.item, 'item');
     return (
       <div>
         <FormGroup>
@@ -38,6 +42,8 @@ export default class Item extends Component {
 
 Item.propTypes = {
   setItem: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired
+  setNewItem: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired,
+  last: PropTypes.bool
 };
 

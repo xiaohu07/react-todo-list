@@ -2,7 +2,7 @@
  * Created by mhu on 3/1/2017.
  */
 
-import { SET_ITEM, SET_TITLE } from '../constants/index';
+import { SET_ITEM, SET_TITLE, SET_NEW_ITEM } from '../constants/index';
 
 const INITIAL_STATE = {
   lists: [
@@ -22,21 +22,24 @@ const INITIAL_STATE = {
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case SET_ITEM: {
-      return Object.assign({}, state, {
-        lists: [
-          {
-            listId: action.payload.listId,
-            title: state.lists[action.payload.listId].title,
-            items: [
-              {
-                itemId: action.payload.itemId,
-                listId: action.payload.listId,
-                value: action.payload.value
-              }
-            ]
-          }
-        ]
-      });
+      const item = {
+        itemId: action.payload.itemId,
+        listId: action.payload.listId,
+        value: action.payload.value
+      };
+      const tempState = state;
+      tempState.lists[action.payload.listId].items[action.payload.itemId] = item;
+      return Object.assign({}, state, tempState);
+    }
+    case SET_NEW_ITEM: {
+      const newItem = {
+        itemId: action.payload.itemId,
+        listId: action.payload.listId,
+        value: action.payload.value
+      };
+      const tempState = state;
+      tempState.lists[action.payload.listId].items.push(newItem);
+      return Object.assign({}, state, tempState);
     }
     case SET_TITLE: {
       return Object.assign({}, state, {
