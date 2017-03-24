@@ -3,10 +3,10 @@
  */
 import { SET_ITEM, SET_TITLE } from '../constants/index';
 
-export function setItem(listId, content) {
+export function setItem(itemId, value) {
   return {
     type: SET_ITEM,
-    payload: { listId, content }
+    payload: { itemId, value }
   };
 }
 
