@@ -23,3 +23,5 @@ export function setTitle(listId, title) {
     payload: { listId, title }
   };
 }
+
+// TODO: save state in localStorage
