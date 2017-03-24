@@ -3,15 +3,25 @@ import { FormGroup, InputGroup, FormControl, Row, Col, Glyphicon } from 'react-b
 import Item from './item';
 
 export default class Items extends Component {
+  renderItems() {
+    return this.props.items.map(item =>
+      <div key={item.itemId}>
+        <Item setItem={this.props.setItem} item={item} />
+      </div>
+    );
+  }
   render() {
     console.log(this.props.items);
+    const items = this.renderItems();
     return (
-      <Item setItem={this.props.setItem} item={this.props.items[0]} />
+      <div>
+        {items}
+      </div>
     );
   }
 }
 
 Items.propTypes = {
   setItem: PropTypes.func.isRequired,
-  items: PropTypes.array
+  items: PropTypes.array.isRequired
 };

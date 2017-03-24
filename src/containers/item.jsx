@@ -5,9 +5,11 @@ export default class Item extends Component {
   constructor(props) {
     super(props);
     this.onNewValue = this.onNewValue.bind(this);
+    this.touched = false;
   }
   onNewValue(event) {
     event.preventDefault();
+    this.touched = true;
     this.props.setItem(this.props.item.itemId, this.props.item.listId, event.target.value);
   }
   render() {
