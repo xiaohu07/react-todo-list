@@ -2,7 +2,7 @@
  * Created by mhu on 3/1/2017.
  */
 
-import { SET_ITEM } from '../constants/index';
+import { SET_ITEM, SET_TITLE } from '../constants/index';
 
 const INITIAL_STATE = {
   lists: [
@@ -12,6 +12,7 @@ const INITIAL_STATE = {
       items: [
         {
           itemId: 0,
+          listId: 0,
           value: null
         }
       ]
@@ -24,14 +25,26 @@ export default function (state = INITIAL_STATE, action) {
       return Object.assign({}, state, {
         lists: [
           {
-            listId: 0,
-            title: null,
+            listId: action.payload.listId,
+            title: state.lists[action.payload.listId].title,
             items: [
               {
                 itemId: action.payload.itemId,
+                listId: action.payload.listId,
                 value: action.payload.value
               }
             ]
+          }
+        ]
+      });
+    }
+    case SET_TITLE: {
+      return Object.assign({}, state, {
+        lists: [
+          {
+            listId: action.payload.listId,
+            title: action.payload.title,
+            items: state.lists[action.payload.listId].items
           }
         ]
       });

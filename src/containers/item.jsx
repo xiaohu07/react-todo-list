@@ -8,7 +8,7 @@ export default class Item extends Component {
   }
   onNewValue(event) {
     event.preventDefault();
-    this.props.setItem(this.props.item.itemId, event.target.value);
+    this.props.setItem(this.props.item.itemId, this.props.item.listId, event.target.value);
   }
   render() {
     console.log(this.props.item);

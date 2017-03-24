@@ -7,13 +7,15 @@ import Items from './items';
 export default class List extends Component {
   constructor(props) {
     super(props);
-    this.onNewTitle = this.onNewTitle.bind(this);
+    this.onSetTitle = this.onSetTitle.bind(this);
   }
-  onNewTitle(event) {
-    this.props.setTitle();
+  onSetTitle(event) {
+    event.preventDefault();
+    this.props.setTitle(this.props.lists[0].listId, event.target.value);
   }
   render() {
     console.log(this.props.lists);
+    console.log(this.props.lists[0].listId);
     return (
       <div className="container">
         <Row>
@@ -21,7 +23,10 @@ export default class List extends Component {
             <div>
               <form>
                 <FormGroup>
-                  <FormControl type="text" placeholder="Enter title here" onChange={this.onNewTitle} />
+                  <FormControl type="text"
+                               placeholder="Enter title here"
+                               onChange={this.onSetTitle}
+                               value={this.props.lists[0].title} />
                 </FormGroup>
                 <Items setItem={this.props.setItem} items={this.props.lists[0].items} />
               </form>
