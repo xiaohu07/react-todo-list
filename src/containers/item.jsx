@@ -11,7 +11,6 @@ export default class Item extends Component {
     event.preventDefault();
     this.touched = true;
     this.props.setItem(this.props.item.itemId, this.props.item.listId, event.target.value);
-    console.log(this.props.last);
     if (this.props.last) {
       this.props.setNewItem(this.props.item.itemId + 1, this.props.item.listId, null);
     }
@@ -28,11 +27,6 @@ export default class Item extends Component {
               </button>
             </InputGroup.Addon>
             <FormControl type="text" placeholder="List item!!!!" onChange={this.onNewValue} value={this.props.item.value} />
-            <InputGroup.Addon>
-              <button type="checkbox">
-                <Glyphicon glyph="plus" />
-              </button>
-            </InputGroup.Addon>
           </InputGroup>
         </FormGroup>
       </div>

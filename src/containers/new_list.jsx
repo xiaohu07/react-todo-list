@@ -1,13 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { FormGroup, InputGroup, FormControl, Row, Col, Glyphicon } from 'react-bootstrap';
-import { setItem, setTitle, setNewItem } from '../actions/lists_actions';
+import { setItem, setTitle, setNewItem, loadSessionStorage, loadInitial } from '../actions/lists_actions';
 import List from './list';
 
 class NewList extends Component {
-
   render() {
-    console.log(this.props.lists);
+    console.log(this.props.lists, 'props');
     return (
       <div>
         <List setTitle={this.props.setTitle} setItem={this.props.setItem}
@@ -33,5 +32,7 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   setItem,
   setTitle,
+  loadSessionStorage,
+  loadInitial,
   setNewItem
 })(NewList);

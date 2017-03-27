@@ -2,23 +2,9 @@
  * Created by mhu on 3/1/2017.
  */
 
-import { SET_ITEM, SET_TITLE, SET_NEW_ITEM } from '../constants/index';
+import { SET_ITEM, SET_TITLE, SET_NEW_ITEM, INITIAL_STATE } from '../constants/index';
 
-const INITIAL_STATE = {
-  lists: [
-    {
-      listId: 0,
-      title: null,
-      items: [
-        {
-          itemId: 0,
-          listId: 0,
-          value: null
-        }
-      ]
-    }
-  ]
-};
+
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case SET_ITEM: {
@@ -52,7 +38,8 @@ export default function (state = INITIAL_STATE, action) {
         ]
       });
     }
-    default:
+    default: {
       return state;
+    }
   }
 }
