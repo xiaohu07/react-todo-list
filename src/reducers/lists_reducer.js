@@ -2,7 +2,7 @@
  * Created by mhu on 3/1/2017.
  */
 
-import { SET_ITEM, SET_TITLE, SET_NEW_ITEM, INITIAL_STATE } from '../constants/index';
+import { SET_ITEM, SET_TITLE, SET_NEW_ITEM, INITIAL_STATE, REMOVE_ITEM } from '../constants/index';
 
 
 export default function (state = INITIAL_STATE, action) {
@@ -37,6 +37,11 @@ export default function (state = INITIAL_STATE, action) {
           }
         ]
       });
+    }
+    case REMOVE_ITEM: {
+      const tempState = state;
+      tempState.lists[action.payload.listId].items.splice(action.payload.itemId, 1);
+      return Object.assign({}, state, tempState);
     }
     default: {
       return state;

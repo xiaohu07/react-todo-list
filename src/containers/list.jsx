@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { FormGroup, InputGroup, FormControl, Row, Col, Glyphicon } from 'react-bootstrap';
+import { FormGroup, InputGroup, FormControl, Row, Col, Button } from 'react-bootstrap';
 import Items from './items';
+
+
+// TODO: 1> Save list  2> Delete each row button  3> Checkbox status
 
 export default class List extends Component {
   constructor(props) {
@@ -12,7 +15,6 @@ export default class List extends Component {
     this.props.setTitle(this.props.lists[0].listId, event.target.value);
   }
   render() {
-    console.log(this.props.lists, 'lists');
     return (
       <div className="container">
         <Row>
@@ -25,8 +27,12 @@ export default class List extends Component {
                                onChange={this.onSetTitle}
                                value={this.props.lists[0].title} />
                 </FormGroup>
-                <Items setItem={this.props.setItem} setNewItem={this.props.setNewItem} items={this.props.lists[0].items} />
+                <Items setItem={this.props.setItem} setNewItem={this.props.setNewItem}
+                       removeItem={this.props.removeItem} items={this.props.lists[0].items} />
               </form>
+              <div>
+                <Button bsStyle="primary" className="pull-right">Done</Button>
+              </div>
             </div>
           </Col>
         </Row>
@@ -39,5 +45,6 @@ List.propTypes = {
   setItem: PropTypes.func.isRequired,
   setNewItem: PropTypes.func.isRequired,
   setTitle: PropTypes.func.isRequired,
+  removeItem: PropTypes.func.isRequired,
   lists: PropTypes.array.isRequired
 };

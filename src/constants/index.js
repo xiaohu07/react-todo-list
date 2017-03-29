@@ -5,6 +5,7 @@
 export const SET_ITEM = 'SET_ITEM';
 export const SET_NEW_ITEM = 'SET_NEW_ITEM';
 export const SET_TITLE = 'SET_TITLE';
+export const REMOVE_ITEM = 'REMOVE_ITEM';
 
 export const INITIAL_STATE = {
   lists: [
