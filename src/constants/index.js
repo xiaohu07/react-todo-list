@@ -8,17 +8,17 @@ export const SET_TITLE = 'SET_TITLE';
 export const REMOVE_ITEM = 'REMOVE_ITEM';
 
 export const INITIAL_STATE = {
-  lists: [
-    {
+  lists: {
+    0: {
       listId: 0,
       title: null,
-      items: [
-        {
+      items: {
+        0: {
           itemId: 0,
           listId: 0,
           value: null
         }
-      ]
+      }
     }
-  ]
+  }
 };

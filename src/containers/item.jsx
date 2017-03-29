@@ -45,7 +45,6 @@ Item.propTypes = {
   setNewItem: PropTypes.func.isRequired,
   removeItem: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
-  maxItemId: PropTypes.number.isRequired,
-  last: PropTypes.bool.isRequired
+  maxItemId: PropTypes.number.isRequired
 };
 

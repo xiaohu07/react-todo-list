@@ -24,7 +24,7 @@ export default function (state = INITIAL_STATE, action) {
         value: action.payload.value
       };
       const tempState = state;
-      tempState.lists[action.payload.listId].items.push(newItem);
+      tempState.lists[action.payload.listId].items[action.payload.itemId] = newItem;
       return Object.assign({}, state, tempState);
     }
     case SET_TITLE: {
@@ -40,7 +40,7 @@ export default function (state = INITIAL_STATE, action) {
     }
     case REMOVE_ITEM: {
       const tempState = state;
-      tempState.lists[action.payload.listId].items.splice(action.payload.itemId, 1);
+      delete tempState.lists[action.payload.listId].items[action.payload.itemId];
       return Object.assign({}, state, tempState);
     }
     default: {

@@ -46,5 +46,5 @@ List.propTypes = {
   setNewItem: PropTypes.func.isRequired,
   setTitle: PropTypes.func.isRequired,
   removeItem: PropTypes.func.isRequired,
-  lists: PropTypes.array.isRequired
+  lists: PropTypes.object.isRequired
 };
