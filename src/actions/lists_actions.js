@@ -1,7 +1,7 @@
 /**
  * Created by mhu on 3/1/2017.
  */
-import { SET_ITEM, SET_TITLE, SET_NEW_ITEM, REMOVE_ITEM, COMPLETE_ITEM } from '../constants/index';
+import { SET_ITEM, SET_TITLE, SET_NEW_ITEM, REMOVE_ITEM, COMPLETE_ITEM, RECOVER_ITEM } from '../constants/index';
 
 export function setItem(itemId, listId, value) {
   return {
@@ -31,7 +31,16 @@ export function completeItem(itemId, listId) {
   };
 }
 
+export function recoverItem(itemId, listId) {
+  return {
+    type: RECOVER_ITEM,
+    payload: { itemId, listId }
+  };
+}
+
 export function removeItem(itemId, listId) {
+  console.log(itemId);
+  console.log(listId);
   return {
     type: REMOVE_ITEM,
     payload: { itemId, listId }

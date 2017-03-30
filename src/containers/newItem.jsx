@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { isNull } from 'lodash';
 import { FormGroup, InputGroup, FormControl, Glyphicon, Button } from 'react-bootstrap';
 
-export default class Item extends Component {
+export default class NewItem extends Component {
   constructor(props) {
     super(props);
     this.onNewValue = this.onNewValue.bind(this);
@@ -59,7 +59,7 @@ export default class Item extends Component {
   }
 }
 
-Item.propTypes = {
+NewItem.propTypes = {
   setItem: PropTypes.func.isRequired,
   setNewItem: PropTypes.func.isRequired,
   removeItem: PropTypes.func.isRequired,

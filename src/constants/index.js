@@ -7,6 +7,7 @@ export const SET_NEW_ITEM = 'SET_NEW_ITEM';
 export const SET_TITLE = 'SET_TITLE';
 export const REMOVE_ITEM = 'REMOVE_ITEM';
 export const COMPLETE_ITEM = 'COMPLETE_ITEM ';
+export const RECOVER_ITEM = 'COMPLETE_ITEM ';
 
 export const INITIAL_STATE = {
   lists: {

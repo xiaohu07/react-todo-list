@@ -29,7 +29,7 @@ export default class List extends Component {
                 </FormGroup>
                 <Items setItem={this.props.setItem} setNewItem={this.props.setNewItem}
                        removeItem={this.props.removeItem} items={this.props.lists[0].items}
-                       completeItem={this.props.completeItem} />
+                       completeItem={this.props.completeItem} recoverItem={this.props.recoverItem} />
               </form>
               <div>
                 <Button bsStyle="primary" className="pull-right">Done</Button>
@@ -47,6 +47,7 @@ List.propTypes = {
   setNewItem: PropTypes.func.isRequired,
   setTitle: PropTypes.func.isRequired,
   completeItem: PropTypes.func.isRequired,
+  recoverItem: PropTypes.func.isRequired,
   removeItem: PropTypes.func.isRequired,
   lists: PropTypes.object.isRequired
 };
