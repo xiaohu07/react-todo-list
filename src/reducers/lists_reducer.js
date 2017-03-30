@@ -28,15 +28,9 @@ export default function (state = INITIAL_STATE, action) {
       return Object.assign({}, state, tempState);
     }
     case SET_TITLE: {
-      return Object.assign({}, state, {
-        lists: [
-          {
-            listId: action.payload.listId,
-            title: action.payload.title,
-            items: state.lists[action.payload.listId].items
-          }
-        ]
-      });
+      const tempState = state;
+      tempState.lists[action.payload.listId].title = action.payload.title;
+      return Object.assign({}, state, tempState);
     }
     case REMOVE_ITEM: {
       const tempState = state;

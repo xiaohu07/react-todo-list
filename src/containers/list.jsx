@@ -3,7 +3,7 @@ import { FormGroup, InputGroup, FormControl, Row, Col, Button } from 'react-boot
 import Items from './items';
 
 
-// TODO: 1> Save list  2> Delete each row button  3> Checkbox status
+// TODO: 1> Save list  2> Complete items
 
 export default class List extends Component {
   constructor(props) {
@@ -15,6 +15,7 @@ export default class List extends Component {
     this.props.setTitle(this.props.lists[0].listId, event.target.value);
   }
   render() {
+    console.log(this.props.lists);
     return (
       <div className="container">
         <Row>
