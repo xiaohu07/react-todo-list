@@ -15,7 +15,6 @@ export default class List extends Component {
     this.props.setTitle(this.props.lists[0].listId, event.target.value);
   }
   render() {
-    console.log(this.props.lists);
     return (
       <div className="container">
         <Row>
@@ -29,7 +28,8 @@ export default class List extends Component {
                                value={this.props.lists[0].title} />
                 </FormGroup>
                 <Items setItem={this.props.setItem} setNewItem={this.props.setNewItem}
-                       removeItem={this.props.removeItem} items={this.props.lists[0].items} />
+                       removeItem={this.props.removeItem} items={this.props.lists[0].items}
+                       completeItem={this.props.completeItem} />
               </form>
               <div>
                 <Button bsStyle="primary" className="pull-right">Done</Button>
@@ -46,6 +46,7 @@ List.propTypes = {
   setItem: PropTypes.func.isRequired,
   setNewItem: PropTypes.func.isRequired,
   setTitle: PropTypes.func.isRequired,
+  completeItem: PropTypes.func.isRequired,
   removeItem: PropTypes.func.isRequired,
   lists: PropTypes.object.isRequired
 };

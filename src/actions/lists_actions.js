@@ -1,7 +1,7 @@
 /**
  * Created by mhu on 3/1/2017.
  */
-import { SET_ITEM, SET_TITLE, SET_NEW_ITEM, REMOVE_ITEM } from '../constants/index';
+import { SET_ITEM, SET_TITLE, SET_NEW_ITEM, REMOVE_ITEM, COMPLETE_ITEM } from '../constants/index';
 
 export function setItem(itemId, listId, value) {
   return {
@@ -21,6 +21,13 @@ export function setTitle(listId, title) {
   return {
     type: SET_TITLE,
     payload: { listId, title }
+  };
+}
+
+export function completeItem(itemId, listId) {
+  return {
+    type: COMPLETE_ITEM,
+    payload: { itemId, listId }
   };
 }
 
