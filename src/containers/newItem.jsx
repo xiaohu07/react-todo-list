@@ -18,7 +18,7 @@ export default class NewItem extends Component {
   }
   onNewValue(event) {
     event.preventDefault();
-    this.props.setItem(this.props.item.itemId, this.props.item.listId, event.target.value);
+    this.props.setItem(this.props.item.itemId, this.props.item.listId, event.target.value, false);
     if (this.props.item.itemId === this.props.maxItemId) {
       this.props.setNewItem(this.props.maxItemId + 1, this.props.item.listId, null);
     }
@@ -33,12 +33,9 @@ export default class NewItem extends Component {
     if (!isNull(this.props.item.value)) {
       this.props.completeItem(this.props.item.itemId, this.props.item.listId);
       this.glyph = 'check';
-    } else {
-      console.log('+');
     }
   }
   render() {
-    console.log(this.props.item);
     return (
       <div>
         <FormGroup>

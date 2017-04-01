@@ -2,7 +2,8 @@
  * Created by mhu on 3/1/2017.
  */
 
-import { SET_ITEM, SET_TITLE, SET_NEW_ITEM, INITIAL_STATE, REMOVE_ITEM, COMPLETE_ITEM, RECOVER_ITEM } from '../constants/index';
+import { SET_ITEM, SET_TITLE, SET_NEW_ITEM,
+  INITIAL_STATE, REMOVE_ITEM, COMPLETE_ITEM, RECOVER_ITEM } from '../constants/index';
 
 
 export default function (state = INITIAL_STATE, action) {
@@ -12,7 +13,7 @@ export default function (state = INITIAL_STATE, action) {
         itemId: action.payload.itemId,
         listId: action.payload.listId,
         value: action.payload.value,
-        completed: false
+        completed: action.payload.completed
       };
       const tempState = state;
       tempState.lists[action.payload.listId].items[action.payload.itemId] = item;
@@ -47,8 +48,6 @@ export default function (state = INITIAL_STATE, action) {
     case RECOVER_ITEM: {
       const tempState = state;
       tempState.lists[action.payload.listId].items[action.payload.itemId].completed = false;
-      console.log('test');
-      console.log(tempState.lists[action.payload.listId].items[action.payload.itemId], 'reducer')
       return Object.assign({}, state, tempState);
     }
     default: {

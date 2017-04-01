@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { FormGroup, InputGroup, FormControl, Row, Col, Button } from 'react-bootstrap';
+import { FormGroup, FormControl, Row, Col, Button } from 'react-bootstrap';
 import Items from './items';
 
 
-// TODO: 1> Save list  2> Complete items
+// TODO: 1> Save list 2> Create modal for editing 3> Search
 
 export default class List extends Component {
   constructor(props) {
@@ -28,8 +28,7 @@ export default class List extends Component {
                                value={this.props.lists[0].title} />
                 </FormGroup>
                 <Items setItem={this.props.setItem} setNewItem={this.props.setNewItem}
-                       removeItem={this.props.removeItem} items={this.props.lists[0].items}
-                       completeItem={this.props.completeItem} recoverItem={this.props.recoverItem} />
+                       removeItem={this.props.removeItem} items={this.props.lists[0].items} />
               </form>
               <div>
                 <Button bsStyle="primary" className="pull-right">Done</Button>
@@ -46,8 +45,6 @@ List.propTypes = {
   setItem: PropTypes.func.isRequired,
   setNewItem: PropTypes.func.isRequired,
   setTitle: PropTypes.func.isRequired,
-  completeItem: PropTypes.func.isRequired,
-  recoverItem: PropTypes.func.isRequired,
   removeItem: PropTypes.func.isRequired,
   lists: PropTypes.object.isRequired
 };

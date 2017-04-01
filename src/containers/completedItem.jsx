@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { isNull } from 'lodash';
 import { FormGroup, InputGroup, FormControl, Glyphicon, Button } from 'react-bootstrap';
 
 export default class CompletedItem extends Component {
@@ -8,14 +7,17 @@ export default class CompletedItem extends Component {
     this.onNewValue = this.onNewValue.bind(this);
     this.onRemoveItem = this.onRemoveItem.bind(this);
     this.onRecoverItem = this.onRecoverItem.bind(this);
+    this.completedText = {
+      textDecoration: 'line-through',
+      color: 'rgba(0,0,0,.54)'
+    };
   }
   componentWillMount() {
     this.glyph = 'check';
   }
   onNewValue(event) {
     event.preventDefault();
-    this.props.setItem(this.props.item.itemId, this.props.item.listId, event.target.value);
-    this.glyph = 'unchecked';
+    this.props.setItem(this.props.item.itemId, this.props.item.listId, event.target.value, true);
   }
   onRemoveItem(event) {
     event.preventDefault();
@@ -23,12 +25,11 @@ export default class CompletedItem extends Component {
   }
   onRecoverItem(event) {
     event.preventDefault();
-    this.props.recoverItem(this.props.item.itemId, this.props.item.listId);
-    console.log('recover')
     this.glyph = 'unchecked';
+    this.props.recoverItem(this.props.item.itemId, this.props.item.listId);
   }
   render() {
-    console.log(this.props.item);
+    console.log(this.props.item, 'completed');
     return (
       <div>
         <FormGroup>
@@ -38,7 +39,7 @@ export default class CompletedItem extends Component {
                 <Glyphicon glyph={this.glyph} />
               </Button>
             </InputGroup.Button>
-            <FormControl type="text" placeholder="Completed Item!" onChange={this.onNewValue} value={this.props.item.value} />
+            <FormControl type="text" placeholder="Completed Item!" onChange={this.onNewValue} value={this.props.item.value} style={this.completedText} />
             <InputGroup.Button>
               <Button onClick={this.onRemoveItem}><Glyphicon glyph="remove-circle" /></Button>
             </InputGroup.Button>

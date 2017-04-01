@@ -3,10 +3,10 @@
  */
 import { SET_ITEM, SET_TITLE, SET_NEW_ITEM, REMOVE_ITEM, COMPLETE_ITEM, RECOVER_ITEM } from '../constants/index';
 
-export function setItem(itemId, listId, value) {
+export function setItem(itemId, listId, value, completed) {
   return {
     type: SET_ITEM,
-    payload: { itemId, listId, value }
+    payload: { itemId, listId, value, completed }
   };
 }
 
@@ -39,12 +39,8 @@ export function recoverItem(itemId, listId) {
 }
 
 export function removeItem(itemId, listId) {
-  console.log(itemId);
-  console.log(listId);
   return {
     type: REMOVE_ITEM,
     payload: { itemId, listId }
   };
 }
-
-// TODO: save state in localStorage

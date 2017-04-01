@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { forIn } from 'lodash';
-import { FormGroup, InputGroup, FormControl, Row, Col, Glyphicon } from 'react-bootstrap';
 import NewItem from './newItem';
 import CompletedItem from './completedItem';
+import { completeItem, recoverItem } from '../actions/lists_actions';
 
-export default class Items extends Component {
+class Items extends Component {
   renderItems() {
     const newItems = [];
     const completedItems = [];
@@ -19,13 +20,13 @@ export default class Items extends Component {
         );
         newItems.push(newItem);
       } else {
-        const completeItem = (
+        const completedItem = (
           <div key={key}>
             <CompletedItem setItem={this.props.setItem} removeItem={this.props.removeItem}
                            recoverItem={this.props.recoverItem} item={item} />
           </div>
         );
-        completedItems.push(completeItem);
+        completedItems.push(completedItem);
       }
     });
     return (
@@ -54,3 +55,14 @@ Items.propTypes = {
   recoverItem: PropTypes.func.isRequired,
   items: PropTypes.object.isRequired
 };
+
+function mapStateToProps(state) {
+  return {
+    lists: state.lists
+  };
+}
+
+export default connect(mapStateToProps, {
+  completeItem,
+  recoverItem,
+})(Items);
