@@ -29,7 +29,6 @@ export default class CompletedItem extends Component {
     this.props.recoverItem(this.props.item.itemId, this.props.item.listId);
   }
   render() {
-    console.log(this.props.item, 'completed');
     return (
       <div>
         <FormGroup>

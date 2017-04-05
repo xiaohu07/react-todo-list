@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Panel, Col, Button } from 'react-bootstrap';
 import Items from './items';
 
 
-// TODO: 1> Save list 2> Create modal for editing 3> Search
+// TODO: 1> Save list 2> Create modal for editing 3> Search 4> Add scss to webpack 5> Color field
 
 export default class List extends Component {
   constructor(props) {
@@ -56,5 +56,6 @@ List.propTypes = {
   removeItem: PropTypes.func.isRequired,
   saveNewList: PropTypes.func.isRequired,
   lists: PropTypes.object.isRequired,
-  maxListId: PropTypes.number.isRequired
+  maxListId: PropTypes.number.isRequired,
+  isNewList: PropTypes.bool.isRequired
 };

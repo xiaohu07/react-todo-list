@@ -10,24 +10,43 @@ class NewList extends Component {
     const lists = [];
     const maxListId = Math.max(...Object.keys(this.props.lists.lists));
     forIn(this.props.lists.lists, (list, key) => {
-      const listNode = (
-        <div key={key}>
-          <Col xs={4} className="padding-collapse-right">
-            <List setTitle={this.props.setTitle} setItem={this.props.setItem}
-                  removeItem={this.props.removeItem} setNewItem={this.props.setNewItem}
-                  saveNewList={this.props.saveNewList} lists={list} maxListId={maxListId} />
-          </Col>
-        </div>
-      );
-      lists.unshift(listNode);
+      if (key < maxListId) {
+        const listNode = (
+          <div key={key} id={key}>
+            <Col xs={4} className="padding-collapse-right">
+              <List setTitle={this.props.setTitle} setItem={this.props.setItem}
+                    removeItem={this.props.removeItem} setNewItem={this.props.setNewItem}
+                    saveNewList={this.props.saveNewList} lists={list} maxListId={maxListId} isNewList={false} />
+            </Col>
+          </div>
+        );
+        lists.unshift(listNode);
+      }
     });
     return lists;
   }
+  renderNewList() {
+    const maxListId = Math.max(...Object.keys(this.props.lists.lists));
+    const newList = (
+      <div>
+        <Col xs={12}>
+          <List setItem={this.props.setItem} setNewItem={this.props.setNewItem}
+                setTitle={this.props.setTitle} removeItem={this.props.removeItem}
+                saveNewList={this.props.saveNewList} lists={this.props.lists.lists[maxListId]}
+                maxListId={maxListId} isNewList={true} />
+        </Col>
+      </div>
+    );
+    return newList;
+  }
   render() {
     const lists = this.renderLists();
+    const newList = this.renderNewList();
     return (
       <div>
-        <Row>
+        <Row className="margin-collapse-right">
+          {newList}
+          <hr />
           {lists}
         </Row>
       </div>
