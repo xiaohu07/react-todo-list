@@ -3,8 +3,7 @@
  */
 
 import { SET_ITEM, SET_TITLE, SET_NEW_ITEM,
-  INITIAL_STATE, REMOVE_ITEM, COMPLETE_ITEM, RECOVER_ITEM } from '../constants/index';
-
+  INITIAL_STATE, REMOVE_ITEM, COMPLETE_ITEM, RECOVER_ITEM, SAVE_NEW_LIST } from '../constants/index';
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -48,6 +47,11 @@ export default function (state = INITIAL_STATE, action) {
     case RECOVER_ITEM: {
       const tempState = state;
       tempState.lists[action.payload.listId].items[action.payload.itemId].completed = false;
+      return Object.assign({}, state, tempState);
+    }
+    case SAVE_NEW_LIST: {
+      const tempState = state;
+      tempState.lists[action.payload.listId] = action.payload;
       return Object.assign({}, state, tempState);
     }
     default: {

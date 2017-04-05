@@ -1,7 +1,8 @@
 /**
  * Created by mhu on 3/1/2017.
  */
-import { SET_ITEM, SET_TITLE, SET_NEW_ITEM, REMOVE_ITEM, COMPLETE_ITEM, RECOVER_ITEM } from '../constants/index';
+import { SET_ITEM, SET_TITLE, SET_NEW_ITEM,
+  REMOVE_ITEM, COMPLETE_ITEM, RECOVER_ITEM, SAVE_NEW_LIST } from '../constants/index';
 
 export function setItem(itemId, listId, value, completed) {
   return {
@@ -43,4 +44,28 @@ export function removeItem(itemId, listId) {
     type: REMOVE_ITEM,
     payload: { itemId, listId }
   };
+}
+
+export function saveNewList(listId) {
+  const newListState = stateInitializer(listId);
+  return {
+    type: SAVE_NEW_LIST,
+    payload: newListState
+  };
+}
+
+function stateInitializer(listId) {
+  return (
+  {
+    listId,
+    title: null,
+    items: {
+      0: {
+        itemId: 0,
+        listId,
+        value: null,
+        completed: false
+      }
+    }
+  });
 }

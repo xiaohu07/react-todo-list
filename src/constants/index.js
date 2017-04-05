@@ -8,6 +8,7 @@ export const SET_TITLE = 'SET_TITLE';
 export const REMOVE_ITEM = 'REMOVE_ITEM';
 export const COMPLETE_ITEM = 'COMPLETE_ITEM ';
 export const RECOVER_ITEM = 'RECOVER_ITEM ';
+export const SAVE_NEW_LIST = 'SAVE_NEW_LIST ';
 
 export const INITIAL_STATE = {
   lists: {
