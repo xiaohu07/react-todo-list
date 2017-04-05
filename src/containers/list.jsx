@@ -1,15 +1,21 @@
 import React, { Component, PropTypes } from 'react';
-import { FormGroup, FormControl, Panel, Col, Button } from 'react-bootstrap';
+import { FormGroup, FormControl, Panel, Col, Button, Modal } from 'react-bootstrap';
 import Items from './items';
 
 
-// TODO: 1> Save list 2> Create modal for editing 3> Search 4> Add scss to webpack 5> Color field
+// TODO: 1> Save list 2> Create modal for editing
+// 3> Search 4> Add scss to webpack 5> Color field 6> Only save not empty new list
 
 export default class List extends Component {
   constructor(props) {
     super(props);
     this.onSetTitle = this.onSetTitle.bind(this);
     this.onSaveNewList = this.onSaveNewList.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.state = {
+      showModal: false
+    };
   }
   onSetTitle(event) {
     event.preventDefault();
@@ -22,11 +28,17 @@ export default class List extends Component {
       this.props.saveNewList(newListId);
     }
   }
+  openModal() {
+    this.setState({ showModal: true });
+  }
+  closeModal() {
+    this.setState({ showModal: false });
+  }
   render() {
-    return (
+    const list = (
       <div>
         <Col sm={9} xs={12}>
-          <Panel header={this.props.lists.title}>
+          <Panel>
             <div>
               <form>
                 <FormGroup>
@@ -46,6 +58,26 @@ export default class List extends Component {
         </Col>
       </div>
     );
+    let existingLists;
+    if (!this.props.isNewList) {
+      existingLists = (
+        <div>
+          <Button bsStyle="primary" bsSize="large" onClick={this.openModal}>Open modal</Button>
+          <Modal show={this.state.showModal} onHide={this.closeModal}>
+            <Modal.Header closeButton>
+              <Modal.Title>{this.props.lists.title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {list}
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.closeModal}>Close</Button>
+            </Modal.Footer>
+          </Modal>
+        </div>
+      );
+    }
+    return (this.props.isNewList ? list : existingLists);
   }
 }
 
