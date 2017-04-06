@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { FormGroup, FormControl, Panel, Col, Button, Modal } from 'react-bootstrap';
+import { FormGroup, FormControl, Panel, Col, Button, Modal, ListGroup, ListGroupItem, Glyphicon } from 'react-bootstrap';
+import { forIn, isNull } from 'lodash';
 import Items from './items';
+import { COMPLETED_TEXT, COLORS } from '../constants/index';
 
 
 // TODO: 1> Save list 2> Create modal for editing
@@ -27,6 +29,9 @@ export default class List extends Component {
       const newListId = this.props.maxListId + 1;
       this.props.saveNewList(newListId);
     }
+    if (!this.props.isNewList) {
+      this.closeModal();
+    }
   }
   openModal() {
     this.setState({ showModal: true });
@@ -34,10 +39,26 @@ export default class List extends Component {
   closeModal() {
     this.setState({ showModal: false });
   }
-  render() {
-    const list = (
+  renderColors() {
+    const colors = [];
+    forIn(COLORS, (color, key) => {
+      const background = {
+        backgroundColor: color,
+        borderRadius: '50%',
+        width: '50px',
+        height: '50px'
+      };
+      const colorSpan = (
+        <span key={key} style={background}>{key}</span>
+      );
+      colors.push(colorSpan);
+    });
+    return colors;
+  }
+  renderNewList() {
+    return (
       <div>
-        <Col sm={9} xs={12}>
+        <Col sm={7} xs={9} xsOffset={2}>
           <Panel>
             <div>
               <form>
@@ -51,33 +72,66 @@ export default class List extends Component {
                        removeItem={this.props.removeItem} items={this.props.lists.items} />
               </form>
               <div>
-                <Button bsStyle="primary" className="pull-right" onClick={this.onSaveNewList}>Done</Button>
+                <div>
+                  {this.renderColors()}
+                </div>
+                <Button bsStyle="primary" className="pull-right" onClick={this.onSaveNewList}>{this.props.isNewList ? 'Save' : 'Done'}</Button>
               </div>
             </div>
           </Panel>
         </Col>
       </div>
     );
-    let existingLists;
+  }
+  renderListPreview() {
+    let existingLists = null;
+    const newItems = [];
+    const completedItems = [];
+    forIn(this.props.lists.items, (item, key) => {
+      if (!item.completed && !isNull(item.value)) {
+        const newItem = (
+          <ListGroupItem key={key}>
+            <Glyphicon glyph="unchecked" />
+            &nbsp;&nbsp;
+            <span>{item.value}</span>
+          </ListGroupItem>
+        );
+        newItems.push(newItem);
+      }
+      if (item.completed) {
+        const completedItem = (
+          <ListGroupItem key={key}>
+            <Glyphicon glyph="check" />
+            &nbsp;&nbsp;
+            <span className="text-md" style={COMPLETED_TEXT}>{item.value}</span>
+          </ListGroupItem>
+        );
+        completedItems.push(completedItem);
+      }
+    });
     if (!this.props.isNewList) {
       existingLists = (
         <div>
-          <Button bsStyle="primary" bsSize="large" onClick={this.openModal}>Open modal</Button>
+          <Panel header={this.props.lists.title} onClick={this.openModal}>
+            <ListGroup fill>
+              {newItems}
+              {completedItems}
+            </ListGroup>
+          </Panel>
           <Modal show={this.state.showModal} onHide={this.closeModal}>
-            <Modal.Header closeButton>
-              <Modal.Title>{this.props.lists.title}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              {list}
-            </Modal.Body>
             <Modal.Footer>
-              <Button onClick={this.closeModal}>Close</Button>
+              {this.renderNewList()}
             </Modal.Footer>
           </Modal>
         </div>
       );
     }
-    return (this.props.isNewList ? list : existingLists);
+    return existingLists;
+  }
+  render() {
+    const newList = this.renderNewList();
+    const existingLists = this.renderListPreview();
+    return (this.props.isNewList ? newList : existingLists);
   }
 }
 

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { FormGroup, InputGroup, FormControl, Glyphicon, Button } from 'react-bootstrap';
+import { COMPLETED_TEXT } from '../constants/index';
 
 export default class CompletedItem extends Component {
   constructor(props) {
@@ -7,10 +8,6 @@ export default class CompletedItem extends Component {
     this.onNewValue = this.onNewValue.bind(this);
     this.onRemoveItem = this.onRemoveItem.bind(this);
     this.onRecoverItem = this.onRecoverItem.bind(this);
-    this.completedText = {
-      textDecoration: 'line-through',
-      color: 'rgba(0,0,0,.54)'
-    };
   }
   componentWillMount() {
     this.glyph = 'check';
@@ -38,7 +35,7 @@ export default class CompletedItem extends Component {
                 <Glyphicon glyph={this.glyph} />
               </Button>
             </InputGroup.Button>
-            <FormControl type="text" placeholder="Completed Item!" onChange={this.onNewValue} value={this.props.item.value} style={this.completedText} />
+            <FormControl type="text" placeholder="Completed Item!" onChange={this.onNewValue} value={this.props.item.value} style={COMPLETED_TEXT} />
             <InputGroup.Button>
               <Button onClick={this.onRemoveItem}><Glyphicon glyph="remove-circle" /></Button>
             </InputGroup.Button>
